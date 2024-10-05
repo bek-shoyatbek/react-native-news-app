@@ -1,9 +1,10 @@
-import { Image, StyleSheet, View, Text } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { StyleSheet, Image, Platform, View, Text } from "react-native";
 
-export default function HomeScreen() {
+export default function SectionsScreen() {
   return (
     <View style={styles.centered}>
-      <Text style={styles.title}>Home screen</Text>
+      <Text style={styles.title}>Sections Screen</Text>
     </View>
   );
 }
