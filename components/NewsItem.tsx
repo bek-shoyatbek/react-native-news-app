@@ -1,22 +1,42 @@
 import React from "react";
 import { News } from "@/types";
-import { Image, Text, View, StyleSheet, Dimensions } from "react-native";
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
+import { Redirect } from "expo-router";
+import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
-export function NewsItem({ title, imageUrl, snippet }: News) {
+export function NewsItem({ id, title, imageUrl, snippet }: News) {
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
-      <View style={styles.contentContainer}>
-        <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-          {title}
-        </Text>
-        <Text style={styles.description} numberOfLines={3} ellipsizeMode="tail">
-          {snippet}
-        </Text>
+    <TouchableOpacity
+      onPress={() => {
+        console.log("Button Pressed, articleId: ", id);
+        router.navigate(`/${id}`);
+      }}
+    >
+      <View style={styles.container}>
+        <Image source={{ uri: imageUrl }} style={styles.image} />
+        <View style={styles.contentContainer}>
+          <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+            {title}
+          </Text>
+          <Text
+            style={styles.description}
+            numberOfLines={3}
+            ellipsizeMode="tail"
+          >
+            {snippet}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

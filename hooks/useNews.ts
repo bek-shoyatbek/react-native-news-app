@@ -1,4 +1,5 @@
 import { api } from "@/api";
+import { getRandomUUID } from "@/helpers/get-random-uuid";
 import { SearchNewsResponse } from "@/types";
 import { useEffect, useState } from "react";
 
@@ -21,8 +22,12 @@ export const useNews = (query: string) => {
           q: query.trim(),
           num: 100,
         });
+        let searchNewsResponse: SearchNewsResponse = response.data;
+        searchNewsResponse.news = searchNewsResponse.news.map((e) => {
+          return { ...e, id: getRandomUUID() };
+        });
 
-        setData(response.data);
+        setData(searchNewsResponse);
       } catch (err: any) {
         setError(
           err.response?.data?.message || err.message || "An error occurred",
@@ -36,6 +41,5 @@ export const useNews = (query: string) => {
     fetchNews();
   }, [query]);
 
-  console.log("data", data);
   return { data, loading, error };
 };

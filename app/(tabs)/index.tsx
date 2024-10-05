@@ -37,7 +37,7 @@ export default function HomeScreen() {
         <FlatList
           data={data?.news}
           renderItem={({ item }) => <NewsItem {...item} />}
-          keyExtractor={(item, index) => index!.toString()}
+          keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContainer}
         />
       )}
