@@ -15,12 +15,7 @@ const { width } = Dimensions.get("window");
 
 export function NewsItem({ id, title, imageUrl, snippet }: News) {
   return (
-    <TouchableOpacity
-      onPress={() => {
-        console.log("Button Pressed, articleId: ", id);
-        router.navigate(`/${id}`);
-      }}
-    >
+    <TouchableOpacity onPress={() => router.navigate(`/${id}`)}>
       <View style={styles.container}>
         <Image source={{ uri: imageUrl }} style={styles.image} />
         <View style={styles.contentContainer}>

@@ -7,6 +7,7 @@ export interface News {
   source: string;
   imageUrl: string;
   position: number;
+  category: string;
 }
 
 export interface SearchParameters {

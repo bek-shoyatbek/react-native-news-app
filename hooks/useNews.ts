@@ -1,4 +1,5 @@
 import { api } from "@/api";
+import { setItem } from "@/helpers/async-storage";
 import { getRandomUUID } from "@/helpers/get-random-uuid";
 import { SearchNewsResponse } from "@/types";
 import { useEffect, useState } from "react";
@@ -20,14 +21,14 @@ export const useNews = (query: string) => {
         setError(null);
         const response = await api.post("/news", {
           q: query.trim(),
-          num: 100,
+          num: 10,
         });
         let searchNewsResponse: SearchNewsResponse = response.data;
         searchNewsResponse.news = searchNewsResponse.news.map((e) => {
           return { ...e, id: getRandomUUID() };
         });
-
         setData(searchNewsResponse);
+        await setItem("news", searchNewsResponse.news);
       } catch (err: any) {
         setError(
           err.response?.data?.message || err.message || "An error occurred",

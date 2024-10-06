@@ -1,4 +1,4 @@
-import React, { LegacyRef, useRef, useState } from "react";
+import React, { LegacyRef, useEffect, useRef, useState } from "react";
 import { NewsItem } from "@/components/NewsItem";
 import { useNews } from "@/hooks/useNews";
 import {
@@ -11,6 +11,8 @@ import {
   View,
   ActivityIndicator,
 } from "react-native";
+import { setItem } from "@/helpers/async-storage";
+import { categories } from "@/constants/categories";
 
 export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState("latest news");
