@@ -1,4 +1,5 @@
 import { api } from "@/api";
+import { categories } from "@/constants/categories";
 import { setItem } from "@/helpers/async-storage";
 import { getRandomUUID } from "@/helpers/get-random-uuid";
 import { SearchNewsResponse } from "@/types";
@@ -25,7 +26,11 @@ export const useNews = (query: string) => {
         });
         let searchNewsResponse: SearchNewsResponse = response.data;
         searchNewsResponse.news = searchNewsResponse.news.map((e) => {
-          return { ...e, id: getRandomUUID() };
+          return {
+            ...e,
+            id: getRandomUUID(),
+            category: categories[Math.floor(Math.random() * categories.length)],
+          };
         });
         setData(searchNewsResponse);
         await setItem("news", searchNewsResponse.news);
